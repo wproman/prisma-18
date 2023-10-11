@@ -54,7 +54,12 @@ export async function POST(req, res) {
     try {
       const prisma = new PrismaClient();
       let reqBody = await req.json();
-      let result = await prisma.user.update({data: reqBody})
+      let result = await prisma.user.update({ 
+        where:reqBody,
+        data:{
+          firstName:"Rasel Ahmed"
+        }
+      })
       return NextResponse.json({ status: "Success", result: result });
     } catch (err) {
       return NextResponse.json({ status: "Fail", result: err.toString() });
